@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Category>
 
-<a class="btn btn-block btn-outline-secondary"
+<a class="btn btn-block btn-outline-secondary w-100"
    asp-action="Index"
    asp-controller="Home"
    asp-route-category="">
@@ -9,7 +9,7 @@
 
 @foreach (var c in Model)
 {
-    <a class="btn btn-block
+    <a class="btn btn-block w-100 mt-2
        @(c.CategoryName == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")"
        asp-action="Index"
        asp-controller="Home"
