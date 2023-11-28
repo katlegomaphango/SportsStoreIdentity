@@ -21,11 +21,11 @@
 <body>
 
     <!-- Navigation -->
-    <div class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="navbar navbar-expand-md bg-dark navbar-dark justify-content-center">
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="#">SPORTS STORE</a>
-            <div><vc:cart-summary /></div>
+            @* <div><vc:cart-summary /></div> *@
 
             <!-- Toggler/collapsible Button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -34,7 +34,7 @@
             </button>
 
             <!-- Links -->
-            <div class="collapse navbar-collapse d-flex flex-row-reverse" id="MyNavbar">
+            <div class="collapse navbar-collapse justify-content-between" id="MyNavbar">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
@@ -48,6 +48,28 @@
                                asp-action="Index">Products</a>
                         </div>
                     </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    @if(User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-link">Hello, @User.Identity.Name</li>
+                        <li class="nav-item">
+                            <form asp-action="Logout" asp-controller="Account" method="post">
+                                <button class="btn btn-link nav-link" type="submit" >Log Out</button>
+                            </form>
+                        </li>
+                        <lin>@await Component.InvokeAsync("CartSummary")</lin>
+                    } 
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Log In</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -63,7 +85,7 @@
         </div>
         <div class="text-sm-center mt-2 border-top border-dark">
             <!-- Replace with your own details -->
-            Initials. Surname 
+            KI. Maphango 
         </div>
     </div>
 
