@@ -38,7 +38,7 @@ namespace SportsStore.Controllers
 
                     if (result.Succeeded)
                     {
-                        return Redirect(model?.ReturnUrl ?? "Home/Index/");
+                        return Redirect(model?.ReturnUrl ?? "/Home/Index");
                     }
                 }
             }
