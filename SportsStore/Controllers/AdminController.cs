@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SportsStore.Data;
@@ -6,6 +7,7 @@ using SportsStore.Models;
 
 namespace SportsStore.Controllers;
 
+[Authorize]
 public class AdminController : Controller
 {
     private IRepositoryWrapper _repository;

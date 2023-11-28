@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportsStore.Data;
 using SportsStore.Models;
 using SportsStore.Models.ViewModels;
 
 namespace SportsStore.Controllers;
 
+[Authorize]
 public class OrderController : Controller
 {
     private readonly IRepositoryWrapper _repository;

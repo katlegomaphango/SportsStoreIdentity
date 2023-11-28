@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models.ViewModels;
 
 namespace SportsStore.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -15,7 +17,7 @@ namespace SportsStore.Controllers
             _userManager = user;
         }
 
-
+        [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
             return View(new LoginModel
@@ -24,6 +26,7 @@ namespace SportsStore.Controllers
             });
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
@@ -47,11 +50,13 @@ namespace SportsStore.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel registerModel)
         {
