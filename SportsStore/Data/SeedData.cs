@@ -94,6 +94,8 @@ public static class SeedData
             );
             context.SaveChanges();
         }
+
+        CreateAdminUser(app);
     }
 
     //admin user seed
@@ -121,13 +123,13 @@ public static class SeedData
                 await roleManager.CreateAsync(new IdentityRole(adminRole));
             }
 
-            IdentityUser user = new IdentityUser
+            IdentityUser user = new()
             {
                 UserName = adminUser,
                 Email = adminEmail,
             };
 
-            IdentityResult result = await userManager.CreateAsync(user, adminRole);
+            IdentityResult result = await userManager.CreateAsync(user, adminPassword);
 
             if(result.Succeeded)
             {
