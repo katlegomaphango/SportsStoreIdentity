@@ -10,11 +10,14 @@ namespace SportsStore.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(SignInManager<IdentityUser> signIn, UserManager<IdentityUser> user)
+        public AccountController(SignInManager<IdentityUser> signIn, UserManager<IdentityUser> user,
+            RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signIn;
             _userManager = user;
+            _roleManager = roleManager;
         }
 
         [AllowAnonymous]

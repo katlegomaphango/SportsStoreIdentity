@@ -7,7 +7,7 @@ using SportsStore.Models;
 
 namespace SportsStore.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Administrator")]
 public class AdminController : Controller
 {
     private IRepositoryWrapper _repository;
