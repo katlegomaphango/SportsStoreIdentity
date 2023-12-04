@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SportsStore.Controllers
 {
@@ -11,6 +12,8 @@ namespace SportsStore.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+
+        private string _role = "Customer";
 
         public AccountController(SignInManager<IdentityUser> signIn, UserManager<IdentityUser> user,
             RoleManager<IdentityRole> roleManager)
@@ -65,6 +68,11 @@ namespace SportsStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(await _roleManager.FindByNameAsync(_role) == null)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(_role));
+                }
+
                 var user = new IdentityUser
                 {
                     UserName = registerModel.UserName,
@@ -75,14 +83,12 @@ namespace SportsStore.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, _role);
                     return RedirectToAction("Login");
                 } 
                 else
                 {
-                    foreach (var error in result.Errors.Select(x => x.Description))
-                    {
-                        ModelState.AddModelError("", error);
-                    }
+                    ModelState.AddModelError("", "Unable to register new user");
                 }
             }
             return View(registerModel);
