@@ -1,6 +1,6 @@
 ﻿@page
 @model CartModel
-@attribute [Authorize]
+@attribute [Authorize(Roles = "Customer")]
 
 <h2>Your cart</h2>
 <table class="table table-bordered table-striped">

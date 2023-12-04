@@ -18,11 +18,14 @@ public class OrderController : Controller
         _cart = cartService;
 
     }
+
+    [Authorize(Roles = "Customer")]
     public IActionResult Checkout()
     {
         return View();
     }
 
+    [Authorize(Roles = "Customer")]
     [HttpPost]
     public IActionResult Checkout(Order order)
     {
@@ -44,6 +47,7 @@ public class OrderController : Controller
         }
     }
 
+    [Authorize(Roles = "Administrator")]
     public IActionResult List()
     {
         return View(new OrderListViewModel
@@ -53,6 +57,7 @@ public class OrderController : Controller
         });
     }
 
+    [Authorize(Roles = "Administrator")]
     [HttpPost]
     public IActionResult MarkShipped(int orderID)
     {
