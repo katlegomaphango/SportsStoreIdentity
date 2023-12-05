@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace SportsStore.Migrations
+namespace SportsStore.Migrations.AppIdentityDb
 {
     /// <inheritdoc />
-    public partial class IdentityInitial : Migration
+    public partial class Identity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
