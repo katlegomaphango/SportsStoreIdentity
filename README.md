@@ -12,3 +12,4 @@ Once a user is registered they can log in.
 A logged in user can add and remove items in the cart.
 
 
+### The Model data is combine with the Identity data in the same Database
