@@ -39,7 +39,7 @@ namespace SportsStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                IdentityUser user = await _userManager.FindByEmailAsync(model.Email);
+                IdentityUser user = await _userManager.FindByNameAsync(model.UserName);
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user,
@@ -52,7 +52,7 @@ namespace SportsStore.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Invalid email or password");
+            ModelState.AddModelError("", "Invalid username or password");
             return View(model);
         }
 
