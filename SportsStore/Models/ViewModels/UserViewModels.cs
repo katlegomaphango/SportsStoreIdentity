@@ -6,7 +6,7 @@ public class LoginModel
 {
     [Required]
     [UIHint("email")]
-    public string Email { get; set; }
+    public string UserName { get; set; }
 
     [Required]
     [UIHint("password")]
