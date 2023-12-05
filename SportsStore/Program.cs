@@ -8,8 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>();
+    .AddEntityFrameworkStores<AppIdentityDbContext>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
@@ -55,5 +58,6 @@ app.UseEndpoints(endpoints => {
 });
 
 SeedData.EnsurePopulated(app);
+SeedDataIdentity.EnsurePopulated(app);
 
 app.Run();
