@@ -95,46 +95,5 @@ public static class SeedData
             context.SaveChanges();
         }
 
-        CreateAdminUser(app);
-    }
-
-    //admin user seed
-    public static async void CreateAdminUser(IApplicationBuilder app)
-    {
-        const string adminUser = "Admin";
-        const string adminPassword = "Admin$123";
-        const string adminEmail = "Admin@mail.com";
-        const string adminRole = "Administrator";
-
-        UserManager<IdentityUser> userManager = app.ApplicationServices
-                                                   .CreateScope()
-                                                   .ServiceProvider
-                                                   .GetRequiredService<UserManager<IdentityUser>>();
-
-        RoleManager<IdentityRole> roleManager = app.ApplicationServices
-                                                   .CreateScope()
-                                                   .ServiceProvider
-                                                   .GetRequiredService<RoleManager<IdentityRole>>();
-
-        if(await userManager.FindByIdAsync( adminUser ) == null)
-        {
-            if(await roleManager.FindByNameAsync( adminRole ) == null)
-            {
-                await roleManager.CreateAsync(new IdentityRole(adminRole));
-            }
-
-            IdentityUser user = new()
-            {
-                UserName = adminUser,
-                Email = adminEmail,
-            };
-
-            IdentityResult result = await userManager.CreateAsync(user, adminPassword);
-
-            if(result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user, adminRole);
-            }
-        }
     }
 }
