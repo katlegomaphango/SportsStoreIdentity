@@ -7,11 +7,11 @@
 <form asp-action="Login" asp-controller="Account" method="post">
     <input type="hidden" asp-for="ReturnUrl" />
     <div class="form-group">
-        <label asp-for="Email"></label>
+        <label asp-for="UserName"></label>
         <div>
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
-        <input asp-for="Email" class="form-control" />
+        <input asp-for="UserName" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Password"></label>
